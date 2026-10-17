@@ -1,0 +1,12 @@
+{
+  "name": "asd-ste100-plugin",
+  "interface": { "displayName": "ASD-STE100" },
+  "plugins": [
+    {
+      "name": "asd-ste100-plugin",
+      "source": { "source": "url", "url": "https://github.com/JarrodAI/asd-ste100-plugin.git", "ref": "main" },
+      "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" },
+      "category": "Productivity"
+    }
+  ]
+}

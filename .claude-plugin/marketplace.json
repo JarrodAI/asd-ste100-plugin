@@ -1,0 +1,14 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "asd-ste100-plugin",
+  "description": "Writes every message to you in ASD-STE100 Simplified Technical English: short, direct, one action per step, one term per object.",
+  "owner": { "name": "JarrodAI", "url": "https://github.com/JarrodAI" },
+  "plugins": [
+    {
+      "name": "asd-ste100-plugin",
+      "description": "Writes every message to you in ASD-STE100 Simplified Technical English: short, direct, one action per step, one term per object.",
+      "source": "./",
+      "category": "productivity"
+    }
+  ]
+}
