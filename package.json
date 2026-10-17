@@ -9,7 +9,7 @@
   "main": "./.opencode/plugins/asd-ste100.mjs",
   "exports": { ".": "./.opencode/plugins/asd-ste100.mjs" },
   "bin": { "asd-ste100-plugin": "./bin/install.js" },
-  "files": ["AGENTS.md", "bin/", "hooks/", "skills/", ".opencode/", ".kiro/", ".agents/rules/", ".github/copilot-instructions.md", "LICENSE"],
+  "files": ["AGENTS.md", "bin/", "scripts/sync.js", "hooks/", "skills/", ".opencode/", ".kiro/", ".agents/rules/", ".github/copilot-instructions.md", "LICENSE"],
   "scripts": { "sync": "node scripts/sync.js", "test": "node --test tests/" },
   "publishConfig": { "access": "public" }
 }
