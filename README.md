@@ -83,6 +83,59 @@ This example is illustrative. It is not a recorded log.
 | [VS Code](#vs-code) | Instructions file | Yes |
 | [Other tools](#other-tools) | `AGENTS.md` | Yes |
 
+### Install with npm
+
+The npm package is `asd-ste100-plugin`. Node.js 18 or later is required.
+
+**What npm can install**
+
+| Tool | npm method |
+|---|---|
+| OpenCode | Yes. Add the package name to `opencode.json`. |
+| Kiro IDE and CLI | Yes. Run the installer: `npx asd-ste100-plugin kiro` |
+| Antigravity IDE | Yes. Run the installer: `npx asd-ste100-plugin antigravity` |
+| VS Code | Yes. Run the installer: `npx asd-ste100-plugin vscode` |
+| Any `AGENTS.md` tool | Yes. Run the installer: `npx asd-ste100-plugin agents` |
+| Claude Code | No. Use the [plugin install](#claude-code) below. |
+| Codex | No. Use the [plugin install](#codex) below. |
+| Copilot CLI | No. Use the [plugin install](#github-copilot-cli) below. |
+
+Claude Code, Codex, and Copilot CLI install plugins from a GitHub marketplace. The npm package does not install into them.
+
+**Run once with `npx`** (no install):
+
+```bash
+cd your-project
+npx asd-ste100-plugin kiro
+```
+
+**Install globally** (then run from any folder):
+
+```bash
+npm install -g asd-ste100-plugin
+cd your-project
+asd-ste100-plugin vscode
+```
+
+**Installer targets**
+
+| Target | File written | Tools |
+|---|---|---|
+| `kiro` | `.kiro/steering/asd-ste100.md` | Kiro IDE, Kiro CLI |
+| `antigravity` | `.agents/rules/asd-ste100.md` | Antigravity IDE |
+| `vscode` | `.github/copilot-instructions.md` | VS Code, GitHub Copilot |
+| `opencode` or `agents` | `AGENTS.md` | OpenCode, and any tool that reads `AGENTS.md` |
+
+Add `--global` to the `kiro` target to write to `~/.kiro/steering/` for all projects.
+
+**OpenCode with npm.** Add the package to `opencode.json`. OpenCode installs it at startup:
+
+```json
+{ "plugin": ["asd-ste100-plugin"] }
+```
+
+**Update.** Run `npm install -g asd-ste100-plugin@latest`, then run the installer target again. A repeat run does not duplicate a block in a shared file.
+
 ### Claude Code
 
 Send these two commands as two separate prompts:
@@ -129,11 +182,7 @@ Add the plugin file to `opencode.json`. Use the absolute path:
 { "plugin": ["/absolute/path/to/asd-ste100-plugin/.opencode/plugins/asd-ste100.mjs"] }
 ```
 
-After the npm package is published, this also works:
-
-```json
-{ "plugin": ["asd-ste100-plugin"] }
-```
+To skip the clone, use the npm package. See [Install with npm](#install-with-npm).
 
 The plugin adds the rules to the system prompt on every turn. It also registers the skill.
 
@@ -150,7 +199,7 @@ This uses `gemini-extension.json`, which loads `AGENTS.md` as always-on context.
 Run this in your project. It writes `.agents/rules/asd-ste100.md`.
 
 ```bash
-npx github:JarrodAI/asd-ste100-plugin antigravity
+npx asd-ste100-plugin antigravity
 ```
 
 ### Kiro IDE and Kiro CLI
@@ -158,7 +207,7 @@ npx github:JarrodAI/asd-ste100-plugin antigravity
 Run this in your project. It writes `.kiro/steering/asd-ste100.md` with `inclusion: always`.
 
 ```bash
-npx github:JarrodAI/asd-ste100-plugin kiro
+npx asd-ste100-plugin kiro
 ```
 
 For all projects, add `--global`. It writes to `~/.kiro/steering/`.
@@ -174,7 +223,7 @@ A Kiro CLI custom agent does not load steering files by default. Add this line t
 Run this in your project. It writes `.github/copilot-instructions.md`, or adds a marked block if the file exists.
 
 ```bash
-npx github:JarrodAI/asd-ste100-plugin vscode
+npx asd-ste100-plugin vscode
 ```
 
 ### Other tools
@@ -182,12 +231,11 @@ npx github:JarrodAI/asd-ste100-plugin vscode
 Any tool that reads `AGENTS.md`:
 
 ```bash
-npx github:JarrodAI/asd-ste100-plugin agents
+npx asd-ste100-plugin agents
 ```
 
 The installer never overwrites a shared file. It adds a block that starts with `<!-- asd-ste100-plugin -->`. It adds the block once only.
 
-After the npm package is published, replace `github:JarrodAI/asd-ste100-plugin` with `asd-ste100-plugin`.
 
 ## The rules
 
