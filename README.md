@@ -94,18 +94,18 @@ The agent confirms with one line: `ASD-STE100 mode: off.` or `ASD-STE100 mode: o
 **Terminal switch.** It works for the plugin installs (Claude Code, Codex, Copilot CLI, OpenCode). It takes effect in new sessions.
 
 ```bash
-npx asd-ste100-plugin off
-npx asd-ste100-plugin on
-npx asd-ste100-plugin status
+npx @threegroup/asd-ste100-plugin off
+npx @threegroup/asd-ste100-plugin on
+npx @threegroup/asd-ste100-plugin status
 ```
 
 **Remove the rule file** (Kiro, VS Code, Antigravity, `AGENTS.md`). Run it in your project:
 
 ```bash
-npx asd-ste100-plugin kiro --remove
-npx asd-ste100-plugin vscode --remove
-npx asd-ste100-plugin antigravity --remove
-npx asd-ste100-plugin agents --remove
+npx @threegroup/asd-ste100-plugin kiro --remove
+npx @threegroup/asd-ste100-plugin vscode --remove
+npx @threegroup/asd-ste100-plugin antigravity --remove
+npx @threegroup/asd-ste100-plugin agents --remove
 ```
 
 `--remove` deletes the file the installer made. For a shared file such as `AGENTS.md`, it removes only the block that the installer added.
@@ -132,17 +132,17 @@ The saved switch is one empty file: `~/.asd-ste100/off`. If the file exists, the
 
 ### Install with npm
 
-The npm package is `asd-ste100-plugin`. Node.js 18 or later is required.
+The npm package is `@threegroup/asd-ste100-plugin`. Node.js 18 or later is required.
 
 **What npm can install**
 
 | Tool | npm method |
 |---|---|
 | OpenCode | Yes. Add the package name to `opencode.json`. |
-| Kiro IDE and CLI | Yes. Run the installer: `npx asd-ste100-plugin kiro` |
-| Antigravity IDE | Yes. Run the installer: `npx asd-ste100-plugin antigravity` |
-| VS Code | Yes. Run the installer: `npx asd-ste100-plugin vscode` |
-| Any `AGENTS.md` tool | Yes. Run the installer: `npx asd-ste100-plugin agents` |
+| Kiro IDE and CLI | Yes. Run the installer: `npx @threegroup/asd-ste100-plugin kiro` |
+| Antigravity IDE | Yes. Run the installer: `npx @threegroup/asd-ste100-plugin antigravity` |
+| VS Code | Yes. Run the installer: `npx @threegroup/asd-ste100-plugin vscode` |
+| Any `AGENTS.md` tool | Yes. Run the installer: `npx @threegroup/asd-ste100-plugin agents` |
 | Claude Code | No. Use the [plugin install](#claude-code) below. |
 | Codex | No. Use the [plugin install](#codex) below. |
 | Copilot CLI | No. Use the [plugin install](#github-copilot-cli) below. |
@@ -153,13 +153,13 @@ Claude Code, Codex, and Copilot CLI install plugins from a GitHub marketplace. T
 
 ```bash
 cd your-project
-npx asd-ste100-plugin kiro
+npx @threegroup/asd-ste100-plugin kiro
 ```
 
 **Install globally** (then run from any folder):
 
 ```bash
-npm install -g asd-ste100-plugin
+npm install -g @threegroup/asd-ste100-plugin
 cd your-project
 asd-ste100-plugin vscode
 ```
@@ -178,10 +178,10 @@ Add `--global` to the `kiro` target to write to `~/.kiro/steering/` for all proj
 **OpenCode with npm.** Add the package to `opencode.json`. OpenCode installs it at startup:
 
 ```json
-{ "plugin": ["asd-ste100-plugin"] }
+{ "plugin": ["@threegroup/asd-ste100-plugin"] }
 ```
 
-**Update.** Run `npm install -g asd-ste100-plugin@latest`, then run the installer target again. A repeat run does not duplicate a block in a shared file.
+**Update.** Run `npm install -g @threegroup/asd-ste100-plugin@latest`, then run the installer target again. A repeat run does not duplicate a block in a shared file.
 
 ### Claude Code
 
@@ -246,7 +246,7 @@ This uses `gemini-extension.json`, which loads `AGENTS.md` as always-on context.
 Run this in your project. It writes `.agents/rules/asd-ste100.md`.
 
 ```bash
-npx asd-ste100-plugin antigravity
+npx @threegroup/asd-ste100-plugin antigravity
 ```
 
 ### Kiro IDE and Kiro CLI
@@ -254,7 +254,7 @@ npx asd-ste100-plugin antigravity
 Run this in your project. It writes `.kiro/steering/asd-ste100.md` with `inclusion: always`.
 
 ```bash
-npx asd-ste100-plugin kiro
+npx @threegroup/asd-ste100-plugin kiro
 ```
 
 For all projects, add `--global`. It writes to `~/.kiro/steering/`.
@@ -270,7 +270,7 @@ A Kiro CLI custom agent does not load steering files by default. Add this line t
 Run this in your project. It writes `.github/copilot-instructions.md`, or adds a marked block if the file exists.
 
 ```bash
-npx asd-ste100-plugin vscode
+npx @threegroup/asd-ste100-plugin vscode
 ```
 
 ### Other tools
@@ -278,7 +278,7 @@ npx asd-ste100-plugin vscode
 Any tool that reads `AGENTS.md`:
 
 ```bash
-npx asd-ste100-plugin agents
+npx @threegroup/asd-ste100-plugin agents
 ```
 
 The installer never overwrites a shared file. It adds a block that starts with `<!-- asd-ste100-plugin -->`. It adds the block once only.

@@ -1,5 +1,5 @@
 {
-  "name": "asd-ste100-plugin",
+  "name": "@threegroup/asd-ste100-plugin",
   "version": "1.0.0",
   "description": "Writes every message to you in ASD-STE100 Simplified Technical English: short, direct, one action per step, one term per object.",
   "keywords": [

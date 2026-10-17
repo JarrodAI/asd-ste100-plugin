@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-// npx asd-ste100-plugin <kiro|antigravity|vscode|opencode|agents> [--global] [--remove]
-// npx asd-ste100-plugin <on|off|status>
+// npx @threegroup/asd-ste100-plugin <kiro|antigravity|vscode|opencode|agents> [--global] [--remove]
+// npx @threegroup/asd-ste100-plugin <on|off|status>
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
@@ -61,7 +61,7 @@ module.exports = { install, remove };
 if (require.main === module) {
   const args = process.argv.slice(2);
   const target = args.find((a) => !a.startsWith('--'));
-  const usage = `Usage:\n  npx asd-ste100-plugin <${Object.keys(targets).join('|')}> [--global] [--remove]\n  npx asd-ste100-plugin <on|off|status>`;
+  const usage = `Usage:\n  npx @threegroup/asd-ste100-plugin <${Object.keys(targets).join('|')}> [--global] [--remove]\n  npx @threegroup/asd-ste100-plugin <on|off|status>`;
   if (!target) {
     console.error(usage);
     process.exit(1);
