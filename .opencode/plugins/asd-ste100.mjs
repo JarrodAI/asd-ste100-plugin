@@ -4,6 +4,7 @@ import { fileURLToPath } from 'url';
 
 const require = createRequire(import.meta.url);
 const { getRules } = require('../../hooks/rules');
+const { isOff } = require('../../hooks/state');
 const skillsDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../skills');
 
 export default async () => ({
@@ -13,6 +14,6 @@ export default async () => ({
     if (!config.skills.paths.includes(skillsDir)) config.skills.paths.push(skillsDir);
   },
   'experimental.chat.system.transform': async (_input, output) => {
-    output.system.push(getRules());
+    if (!isOff()) output.system.push(getRules());
   },
 });

@@ -8,6 +8,14 @@
         "powershell": "node \"${PLUGIN_ROOT}\\hooks\\activate.js\"",
         "timeoutSec": 5
       }
+    ],
+    "userPromptSubmitted": [
+      {
+        "type": "command",
+        "bash": "node \"${PLUGIN_ROOT}/hooks/toggle.js\"",
+        "powershell": "node \"${PLUGIN_ROOT}\\hooks\\toggle.js\"",
+        "timeoutSec": 5
+      }
     ]
   }
 }

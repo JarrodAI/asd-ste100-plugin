@@ -2,14 +2,45 @@
   "name": "asd-ste100-plugin",
   "version": "1.0.0",
   "description": "Writes every message to you in ASD-STE100 Simplified Technical English: short, direct, one action per step, one term per object.",
-  "keywords": ["opencode-plugin", "asd-ste100", "simplified-english", "skills"],
+  "keywords": [
+    "opencode-plugin",
+    "asd-ste100",
+    "simplified-english",
+    "skills"
+  ],
   "license": "MIT",
-  "author": { "name": "JarrodAI", "url": "https://github.com/JarrodAI" },
-  "repository": { "type": "git", "url": "git+https://github.com/JarrodAI/asd-ste100-plugin.git" },
+  "author": {
+    "name": "JarrodAI",
+    "url": "https://github.com/JarrodAI"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JarrodAI/asd-ste100-plugin.git"
+  },
   "main": "./.opencode/plugins/asd-ste100.mjs",
-  "exports": { ".": "./.opencode/plugins/asd-ste100.mjs" },
-  "bin": { "asd-ste100-plugin": "./bin/install.js" },
-  "files": ["AGENTS.md", "bin/", "scripts/sync.js", "hooks/", "skills/", ".opencode/", ".kiro/", ".agents/rules/", ".github/copilot-instructions.md", "LICENSE"],
-  "scripts": { "sync": "node scripts/sync.js", "test": "node --test tests/" },
-  "publishConfig": { "access": "public" }
+  "exports": {
+    ".": "./.opencode/plugins/asd-ste100.mjs"
+  },
+  "bin": {
+    "asd-ste100-plugin": "./bin/install.js"
+  },
+  "files": [
+    "AGENTS.md",
+    "bin/",
+    "scripts/sync.js",
+    "hooks/",
+    "skills/",
+    ".opencode/",
+    ".kiro/",
+    ".agents/rules/",
+    ".github/copilot-instructions.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "sync": "node scripts/sync.js",
+    "test": "node --test tests/"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
 }

@@ -1,10 +1,8 @@
 #!/usr/bin/env node
 // SessionStart hook for Claude Code, Codex and Copilot. Emits the rules as hidden context.
-const { getRules } = require('./rules');
+const { getRules, emit } = require('./rules');
+const { isOff } = require('./state');
 
-const isCopilot = Boolean(process.env.COPILOT_PLUGIN_DATA);
-const context = getRules();
-
-process.stdout.write(JSON.stringify(isCopilot
-  ? { additionalContext: context }
-  : { hookSpecificOutput: { hookEventName: 'SessionStart', additionalContext: context } }));
+emit('SessionStart', isOff()
+  ? 'ASD-STE100 mode is OFF. Write normally. If the user says "asd on", turn it on.'
+  : getRules());

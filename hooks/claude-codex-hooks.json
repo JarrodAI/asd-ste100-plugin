@@ -12,6 +12,18 @@
           }
         ]
       }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/toggle.js\"",
+            "timeout": 5,
+            "statusMessage": "Checking ASD-STE100 switch..."
+          }
+        ]
+      }
     ]
   }
 }

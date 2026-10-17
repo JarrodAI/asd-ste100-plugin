@@ -22,7 +22,9 @@ Short sentences. One action per step. One term per object. The key result first.
 
 `Claude Code` · `Codex` · `Copilot CLI` · `OpenCode` · `Antigravity` · `Kiro` · `VS Code` · `AGENTS.md`
 
-[Article](Article.md) · [Install](#install) · [The rules](#the-rules) · [Limits](#limits)
+**Turn it on or off at any time. Type `asd off` or `asd on`.**
+
+[Article](Article.md) · [Install](#install) · [On and off](#turn-it-on-and-off) · [The rules](#the-rules) · [Limits](#limits)
 
 </div>
 
@@ -32,6 +34,7 @@ Short sentences. One action per step. One term per object. The key result first.
 
 - [What it does](#what-it-does)
 - [Before and after](#before-and-after)
+- [Turn it on and off](#turn-it-on-and-off)
 - [Install](#install)
 - [The rules](#the-rules)
 - [How it works](#how-it-works)
@@ -66,6 +69,50 @@ Andrej Karpathy suggested this idea on 2 October 2026. He asked language models 
 > - Action: Create the file, or change the path.
 
 This example is illustrative. It is not a recorded log.
+
+## Turn it on and off
+
+You can switch the mode at any time. Type one of these in the chat:
+
+| You type | Result |
+|---|---|
+| `asd off` | The agent writes normally. |
+| `asd on` | The agent writes in ASD-STE100 again. |
+
+`stop asd-ste100`, `start asd-ste100`, and `normal mode` also work.
+
+The agent confirms with one line: `ASD-STE100 mode: off.` or `ASD-STE100 mode: on.`
+
+**Does the switch stay after you close the session?**
+
+| Tool | Chat switch | Stays after restart |
+|---|---|---|
+| Claude Code, Codex, Copilot CLI | `asd off` / `asd on` | Yes. A hook saves the switch. |
+| OpenCode | `asd off` / `asd on` | Use the terminal switch below. |
+| Kiro, VS Code, Antigravity, `AGENTS.md` | `asd off` / `asd on` (current session) | No. To remove it, run the `--remove` command below. |
+
+**Terminal switch.** It works for the plugin installs (Claude Code, Codex, Copilot CLI, OpenCode). It takes effect in new sessions.
+
+```bash
+npx asd-ste100-plugin off
+npx asd-ste100-plugin on
+npx asd-ste100-plugin status
+```
+
+**Remove the rule file** (Kiro, VS Code, Antigravity, `AGENTS.md`). Run it in your project:
+
+```bash
+npx asd-ste100-plugin kiro --remove
+npx asd-ste100-plugin vscode --remove
+npx asd-ste100-plugin antigravity --remove
+npx asd-ste100-plugin agents --remove
+```
+
+`--remove` deletes the file the installer made. For a shared file such as `AGENTS.md`, it removes only the block that the installer added.
+
+**Disable in the tool.** Claude Code also has `/plugin disable asd-ste100-plugin@asd-ste100-plugin` and `/plugin enable asd-ste100-plugin@asd-ste100-plugin`.
+
+The saved switch is one empty file: `~/.asd-ste100/off`. If the file exists, the mode is off.
 
 ## Install
 
@@ -290,13 +337,14 @@ SessionStart   system-prompt
  Copilot)
 ```
 
+- **Prompt hook.** `hooks/toggle.js` watches for `asd on` and `asd off`. It saves the switch in `~/.asd-ste100/off` and tells the agent the new mode.
 - **Session-start hook.** `hooks/activate.js` reads the rules and prints them as hidden context. Claude Code and Codex get `hookSpecificOutput.additionalContext`. Copilot gets `additionalContext`. The hook runs on `startup`, `resume`, `clear`, and `compact`, so the rules survive a context reset.
 - **OpenCode plugin.** `.opencode/plugins/asd-ste100.mjs` adds the rules to the system prompt on every turn. It also adds the `skills/` folder to the skill search path.
 - **Static rule files.** Tools with no hook system load a rule file. `scripts/sync.js` generates these files from the skill file. A test fails if a copy is out of date.
 
 ## Stop, change, or remove it
 
-**Stop for a session.** Say `stop asd-ste100` or `normal mode`.
+**Turn it off or on.** See [Turn it on and off](#turn-it-on-and-off).
 
 **Change the rules.**
 
@@ -358,7 +406,9 @@ asd-ste100-plugin/
 ├── skills/asd-ste100/SKILL.md      the rules (single source)
 ├── hooks/
 │   ├── rules.js                    reads the rules from SKILL.md
+│   ├── state.js                    the on/off switch (~/.asd-ste100/off)
 │   ├── activate.js                 session-start hook
+│   ├── toggle.js                   prompt hook: "asd on" / "asd off"
 │   ├── claude-codex-hooks.json     hook config: Claude Code, Codex
 │   └── copilot-hooks.json          hook config: Copilot
 ├── .claude-plugin/                 Claude Code plugin + marketplace
@@ -383,7 +433,7 @@ asd-ste100-plugin/
 
 ```bash
 npm run sync   # regenerate AGENTS.md, .agents/rules, .kiro/steering, .github/copilot-instructions.md
-npm test       # 4 tests: copies in sync, hook output, installer, OpenCode plugin
+npm test       # 7 tests: copies in sync, hooks, on/off switch, installer, OpenCode plugin
 ```
 
 The tests need Node.js 18 or later.

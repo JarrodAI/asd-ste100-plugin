@@ -7,4 +7,11 @@ function getRules() {
   return fs.readFileSync(skillPath, 'utf8').replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n/, '').trim();
 }
 
-module.exports = { getRules, skillPath };
+function emit(event, context) {
+  const isCopilot = Boolean(process.env.COPILOT_PLUGIN_DATA);
+  process.stdout.write(JSON.stringify(isCopilot
+    ? { additionalContext: context }
+    : { hookSpecificOutput: { hookEventName: event, additionalContext: context } }));
+}
+
+module.exports = { getRules, emit, skillPath };

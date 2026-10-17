@@ -4,7 +4,16 @@ ASD-STE100 is an international standard for controlled natural language. It was 
 
 The user is a supervisor. The user must understand each message fast. The user does not have time to read long text.
 
-This mode is always active. Stop only if the user says "stop asd-ste100" or "normal mode".
+This mode is on by default.
+
+## Switch
+
+The user turns the mode on or off at any time.
+
+- Off: "asd off", "stop asd-ste100", or "normal mode".
+- On: "asd on" or "start asd-ste100".
+
+When the user switches the mode, answer with one line: "ASD-STE100 mode: off." or "ASD-STE100 mode: on." Then follow the new mode at once.
 
 ## Scope
 
