@@ -127,6 +127,99 @@ I tested the Claude Code and Codex installs. The plugin loaded, the hook ran, an
 
 ---
 
+## How to install it
+
+Pick your tool. Each install takes about one minute. You need Node.js on your PATH, because the hooks run on Node.
+
+### Claude Code
+
+Send these as two separate prompts:
+
+```
+/plugin marketplace add JarrodAI/asd-ste100-plugin
+```
+```
+/plugin install asd-ste100-plugin@asd-ste100-plugin
+```
+
+Start a new session. The rules load by themselves.
+
+### Codex
+
+```bash
+codex plugin marketplace add JarrodAI/asd-ste100-plugin
+codex plugin add asd-ste100-plugin@asd-ste100-plugin
+```
+
+Run `codex`, open `/hooks`, trust the session-start hook, and start a new thread.
+
+### GitHub Copilot CLI
+
+```bash
+copilot plugin marketplace add JarrodAI/asd-ste100-plugin
+copilot plugin install asd-ste100-plugin@asd-ste100-plugin
+```
+
+### OpenCode
+
+```bash
+git clone https://github.com/JarrodAI/asd-ste100-plugin
+```
+
+Then add the plugin file to `opencode.json`, with the absolute path to your clone:
+
+```json
+{ "plugin": ["/absolute/path/to/asd-ste100-plugin/.opencode/plugins/asd-ste100.mjs"] }
+```
+
+### Antigravity
+
+CLI:
+
+```bash
+agy plugin install https://github.com/JarrodAI/asd-ste100-plugin
+```
+
+IDE (run inside your project):
+
+```bash
+npx github:JarrodAI/asd-ste100-plugin antigravity
+```
+
+### Kiro (IDE and CLI)
+
+Run inside your project:
+
+```bash
+npx github:JarrodAI/asd-ste100-plugin kiro
+```
+
+This writes a steering file with `inclusion: always`. A Kiro CLI custom agent also needs this line in its `resources` field:
+
+```
+"file://.kiro/steering/asd-ste100.md"
+```
+
+### VS Code
+
+Run inside your project:
+
+```bash
+npx github:JarrodAI/asd-ste100-plugin vscode
+```
+
+### Anything else that reads AGENTS.md
+
+```bash
+npx github:JarrodAI/asd-ste100-plugin agents
+```
+
+The `npx` installer never overwrites a file you already have. It adds one marked block, and only once.
+
+To stop the mode for a session, say "stop asd-ste100".
+
+---
+
 ## What this plugin is not
 
 I want to be honest about the limits, because the standard's own maintainers are.
@@ -217,6 +310,10 @@ One rules file. Seven doors:
 Claude Code, Codex, Copilot CLI, OpenCode, Antigravity, Kiro, VS Code.
 
 Plugins where the tool has plugins. One `npx` command where it does not.
+
+Claude Code:
+/plugin marketplace add JarrodAI/asd-ste100-plugin
+/plugin install asd-ste100-plugin@asd-ste100-plugin
 
 **8/**
 Honest limits: it is a style prompt, not a certified STE checker. No full dictionary. Short ≠ correct. You still verify.
